@@ -12,12 +12,14 @@ Transmission torrent client running behind NordVPN in Docker.
 
 ### 1. Configure environment
 
-Create a `.env` file with your NordVPN credentials:
+**Docker Compose:** Create a `.env` file in the same directory as `docker-compose.yml`:
 
 ```env
 OPENVPN_USERNAME=your-nordvpn-username
 OPENVPN_PASSWORD=your-nordvpn-password
 ```
+
+**TrueNAS Scale:** Set the variables directly in the app config under Apps → cloakr → Edit → Environment Variables. No `.env` file needed.
 
 ### 2. Configure volumes
 
