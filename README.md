@@ -19,7 +19,7 @@ OPENVPN_USERNAME=your-nordvpn-username
 OPENVPN_PASSWORD=your-nordvpn-password
 ```
 
-**TrueNAS Scale:** Set the variables directly in the app config under Apps → cloakr → Edit → Environment Variables. No `.env` file needed.
+**TrueNAS Scale:** Since this is a custom app, env vars are embedded in the compose file. Go to Apps → cloakr → Edit and update the `environment:` section directly in the compose editor.
 
 ### 2. Configure volumes
 
