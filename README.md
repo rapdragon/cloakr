@@ -19,7 +19,43 @@ OPENVPN_USERNAME=your-nordvpn-username
 OPENVPN_PASSWORD=your-nordvpn-password
 ```
 
-**TrueNAS Scale:** Since this is a custom app, env vars are embedded in the compose file. Go to Apps → cloakr → Edit and update the `environment:` section directly in the compose editor.
+**TrueNAS Scale:** Since this is a custom app, env vars are embedded in the compose file. Go to Apps → cloakr → Edit and update the `environment:` section directly in the compose editor:
+
+```yaml
+services:
+  cloakr:
+    image: haugene/transmission-openvpn:latest
+    container_name: cloakr
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    restart: unless-stopped
+    ports:
+      - "9091:9091"
+    environment:
+      OPENVPN_PROVIDER: NORDVPN
+      OPENVPN_USERNAME: john.doe@example.com
+      OPENVPN_PASSWORD: hunter2
+      NORDVPN_COUNTRY: US
+      NORDVPN_PROTOCOL: TCP
+      LOCAL_NETWORK: 192.168.1.0/24
+      TZ: America/New_York
+      PUID: "1000"
+      PGID: "1000"
+      TRANSMISSION_DOWNLOAD_DIR: /downloads
+      TRANSMISSION_INCOMPLETE_DIR: /data/incomplete
+      TRANSMISSION_INCOMPLETE_DIR_ENABLED: "true"
+      TRANSMISSION_WATCH_DIR_FORCE_GENERIC: "true"
+    volumes:
+      - ./data:/data
+      - ./scripts:/scripts
+      - downloads:/downloads
+      - watch:/data/watch
+volumes:
+  downloads:
+  watch:
+```
 
 ### 2. Configure volumes
 
