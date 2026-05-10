@@ -30,5 +30,18 @@ services:
       - watch:/data/watch
 
 volumes:
+  # Replace with CIFS mounts for network storage, e.g.:
+  # downloads:
+  #   driver: local
+  #   driver_opts:
+  #     type: cifs
+  #     device: //<nas-ip>/share/downloads
+  #     o: "noperm,username=<user>,password=<pass>,vers=3.1.1"
+  # watch:
+  #   driver: local
+  #   driver_opts:
+  #     type: cifs
+  #     device: //<nas-ip>/share/torrent
+  #     o: "noperm,username=<user>,password=<pass>,vers=3.1.1"
   downloads:
   watch:
