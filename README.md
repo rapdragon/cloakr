@@ -87,12 +87,32 @@ Transmission web UI available at `http://<host>:9091`.
 
 ## Configuration
 
+| Variable | Required | Default | Description |
+|---|---|---|---|
+| `OPENVPN_USERNAME` | ✅ | — | NordVPN username |
+| `OPENVPN_PASSWORD` | ✅ | — | NordVPN password |
+| `NORDVPN_COUNTRY` | optional | `US` | VPN exit country |
+| `NORDVPN_PROTOCOL` | optional | `TCP` | OpenVPN protocol |
+| `LOCAL_NETWORK` | optional | — | LAN range excluded from VPN kill-switch (e.g. `192.168.1.0/24`) |
+| `TZ` | optional | `UTC` | Timezone |
+| `PUID` / `PGID` | optional | `0` (root) | User/group for file permissions |
+
+### Transmission variables
+
+Any [Transmission config option](https://github.com/transmission/transmission/blob/main/docs/Editing-Configuration-Files.md#options) can be set as an env var by prefixing with `TRANSMISSION_`, uppercasing, and replacing `-` with `_`. All are optional — settings persist in `/config` between restarts. Common ones:
+
 | Variable | Default | Description |
 |---|---|---|
-| `OPENVPN_USERNAME` | required | NordVPN username |
-| `OPENVPN_PASSWORD` | required | NordVPN password |
-| `NORDVPN_COUNTRY` | `US` | VPN exit country |
-| `NORDVPN_PROTOCOL` | `TCP` | OpenVPN protocol |
-| `LOCAL_NETWORK` | `10.69.0.0/16` | LAN range excluded from VPN kill-switch |
-| `TZ` | `America/Denver` | Timezone |
-| `PUID` / `PGID` | `568` | User/group for file permissions |
+| `TRANSMISSION_DOWNLOAD_DIR` | `/downloads` | Where completed downloads go |
+| `TRANSMISSION_INCOMPLETE_DIR` | `/data/incomplete` | Where in-progress downloads go |
+| `TRANSMISSION_INCOMPLETE_DIR_ENABLED` | `false` | Enable incomplete dir |
+| `TRANSMISSION_WATCH_DIR` | `/data/watch` | Watch folder for `.torrent` files |
+| `TRANSMISSION_WATCH_DIR_ENABLED` | `false` | Enable watch dir |
+| `TRANSMISSION_WATCH_DIR_FORCE_GENERIC` | `false` | Use generic watcher — required for CIFS mounts |
+| `TRANSMISSION_SPEED_LIMIT_UP` | — | Upload speed limit (KB/s) |
+| `TRANSMISSION_SPEED_LIMIT_UP_ENABLED` | `false` | Enable upload limit |
+| `TRANSMISSION_SPEED_LIMIT_DOWN` | — | Download speed limit (KB/s) |
+| `TRANSMISSION_SPEED_LIMIT_DOWN_ENABLED` | `false` | Enable download limit |
+| `TRANSMISSION_RATIO_LIMIT` | — | Seeding ratio limit |
+| `TRANSMISSION_RATIO_LIMIT_ENABLED` | `false` | Enable ratio limit |
+| `TRANSMISSION_WEB_UI` | — | Alternative UI: `combustion`, `kettu`, `flood-for-transmission`, `shift` |
